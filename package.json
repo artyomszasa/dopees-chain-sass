@@ -1,0 +1,21 @@
+{
+  "name": "dopees-chain-sass",
+  "version": "0.0.1",
+  "description": "dopees-chain-sass",
+  "main": "lib/sass.js",
+  "types": "lib/sass.d.ts",
+  "author": "",
+  "license": "MIT",
+  "flat": true,
+  "scripts": {
+    "build:prod": "./node_modules/typescript/bin/tsc -p ./tsconfig.prod.json"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.11",
+    "@types/node-sass": "^3.10.32",
+    "dopees-chain": "file://../dopees-chain",
+    "node-sass": "4.10.0",
+    "ts-node": "7.0.1",
+    "typescript": "3.1.6"
+  }
+}
