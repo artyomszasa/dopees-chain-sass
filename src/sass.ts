@@ -65,7 +65,8 @@ export interface Options extends ReversePathResolverConfig {
   includePaths?: string[];
   outputStyle?: "compact" | "compressed" | "expanded" | "nested";
   precision?: number;
-  persists?: boolean
+  persists?: boolean;
+  production?: boolean;
 }
 
 export class SassMapperState implements derived.FileMapperState {
@@ -74,6 +75,7 @@ export class SassMapperState implements derived.FileMapperState {
   selector: (path: string, context: Context) => boolean;
   outputStyle?: "compact" | "compressed" | "expanded" | "nested";
   precision?: number;
+  production: boolean;
   constructor(options: Options) {
     this.sourceResolver = ReversePathResolver.from(options);
     this.innerStateKey = 'sass.innerState';
@@ -84,6 +86,7 @@ export class SassMapperState implements derived.FileMapperState {
     };
     this.outputStyle = options.outputStyle;
     this.precision = options.precision
+    this.production = true === options.production;
   }
 }
 
@@ -101,7 +104,8 @@ export class SassMapper extends derived.FileMapper<Options, SassInnerState, Sass
       file: innerState.sourcePath,
       data: innerState.sourceCode,
       outFile: (<FileName>task.name).path,
-      sourceMap: true
+      sourceMap: !state.production,
+      sourceMapEmbed: !state.production
     };
     const sassResult = await sassRender(options);
     return sassResult.css;

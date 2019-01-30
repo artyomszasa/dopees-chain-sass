@@ -7,6 +7,7 @@ export interface Options extends ReversePathResolverConfig {
     outputStyle?: "compact" | "compressed" | "expanded" | "nested";
     precision?: number;
     persists?: boolean;
+    production?: boolean;
 }
 export declare class SassMapperState implements derived.FileMapperState {
     sourceResolver: PathResolver;
@@ -14,6 +15,7 @@ export declare class SassMapperState implements derived.FileMapperState {
     selector: (path: string, context: Context) => boolean;
     outputStyle?: "compact" | "compressed" | "expanded" | "nested";
     precision?: number;
+    production: boolean;
     constructor(options: Options);
 }
 interface SassInnerState {
