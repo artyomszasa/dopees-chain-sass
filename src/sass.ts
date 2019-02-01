@@ -98,6 +98,7 @@ interface SassInnerState {
 export class SassMapper extends derived.FileMapper<Options, SassInnerState, SassMapperState>  {
   name = 'sass';
   protected async generate(state: SassMapperState, task: Task, innerState: SassInnerState, _: Context) {
+    console.warn(state.production);
     const options : s.Options = {
       outputStyle: state.outputStyle || 'compressed',
       precision: state.precision,
@@ -105,6 +106,7 @@ export class SassMapper extends derived.FileMapper<Options, SassInnerState, Sass
       data: innerState.sourceCode,
       outFile: (<FileName>task.name).path,
       sourceMap: !state.production,
+      sourceMapContents: !state.production,
       sourceMapEmbed: !state.production
     };
     const sassResult = await sassRender(options);
